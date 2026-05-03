@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Retro Minesweeper 1985</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#000000">
+</head>
+<body>
+
+<!-- MENU -->
+<div id="menu" class="screen active">
+  <img src="titleScreen.png" class="title-img">
+
+  <div class="menu-buttons">
+    <button onclick="startGame('easy')">EASY</button>
+    <button onclick="startGame('medium')">MEDIUM</button>
+    <button onclick="startGame('hard')">HARD</button>
+    <button onclick="showHowTo()">HOW TO PLAY</button>
+      
+  </div>
+</div>
+
+<!-- GAME -->
+<div id="game" class="screen">
+<div id="status">
+  <img src="title.png" alt="Retro Minesweeper" class="status-title">
+</div>
+  <div id="board"></div>
+  <button id="restart" onclick="showMenu()">PLAY AGAIN</button>
+</div>
+<!-- Instructions -->
+<div id="helpOverlay" class="overlay hidden">
+  <div style="font-size:16px; max-width:400px; color:#ffe600;">
+    <h3>HOW TO PLAY</h3>
+
+    <p>
+      • Click a tile to reveal it<br>
+      • Numbers show nearby mines<br>
+      • Long press or rt-click to flag<br>
+      • Avoid mines<br>
+      • Flag all the mines!
+    </p>
+
+    <button onclick="closeHelp()">OK</button>
+  </div>
+</div>
+<!-- GAME OVER OVERLAY -->
+<div id="overlay" class="overlay hidden"></div>
+
+<script src="script.js"></script>
+</body>
+</html>
