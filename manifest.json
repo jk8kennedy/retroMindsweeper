@@ -1,13 +1,13 @@
 {
   "name": "Retro Minesweeper",
   "short_name": "Minesweeper",
-  "start_url": "/",
-  "scope": "/",
+  "start_url": "/retroMinesweeper/",
+  "scope": "/retroMinesweeper/"
   "display": "standalone",
   "orientation": "portrait",
   "background_color": "#000000",
   "theme_color": "#000000",
-  "description": "A retro neon Minesweeper game with multiple difficulty levels.",
+  "description": "A retro neon minesweeper game with multiple difficulty levels.",
   "icons": [
     {
       "src": "icons/icon-192.png",
