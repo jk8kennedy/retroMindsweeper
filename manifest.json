@@ -2,7 +2,7 @@
   "name": "Retro Minesweeper",
   "short_name": "Minesweeper",
   "start_url": "/retroMinesweeper/",
-  "scope": "/retroMinesweeper/"
+  "scope": "/retroMinesweeper/",
   "display": "standalone",
   "orientation": "portrait",
   "background_color": "#000000",
