@@ -3,12 +3,6 @@ body {
   font-family: Courier, monospace;
   background: #000000;
   color: #ffe600;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-
   min-height: 100vh;
 }
 
@@ -16,12 +10,16 @@ body {
 .screen {
   display: none;
   text-align: center;
+  min-height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;  /* vertical centring */
+  align-items: center;      /* horizontal centring */
 }
 
 .screen.active {
   display: flex;
-  flex-direction: column;
-  align-items: center;
 }
 
 /* SPLASH IMAGE */
