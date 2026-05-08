@@ -9,13 +9,18 @@ body {
 /* SCREEN SYSTEM */
 .screen {
   display: none;
-  text-align: center;
   min-height: 100vh;
+  width: 100vw;
 
-  display: flex;
   flex-direction: column;
-  justify-content: center;  /* vertical centring */
-  align-items: center;      /* horizontal centring */
+  justify-content: center;
+  align-items: center;
+
+  text-align: center;
+}
+
+.screen.active {
+  display: flex;
 }
 
 .screen.active {
