@@ -50,7 +50,7 @@ a {
   display: inline-block;
   padding: 12px 24px;
   background: #00ff66;
-  color: #000;
+  color: #caa6ff;   /* light purple text */
   text-decoration: none;
   font-weight: bold;
   transition: 0.2s;
