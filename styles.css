@@ -5,7 +5,7 @@ body {
   color: #ffe600;
 
   display: flex;
-  flex-direction: column;   /* 👈 THIS is the key */
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 
