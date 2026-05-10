@@ -1,0 +1,271 @@
+body {
+  margin: 0;
+  font-family: Courier, monospace;
+  background: #000000;
+  color: #ffe600;
+  min-height: 100svh;
+}
+
+/* SCREEN SYSTEM */
+.screen {
+  display: none;
+  min-height: 100svh;
+  width: 100vw;
+
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  text-align: center;
+}
+
+.screen.active {
+  display: flex;
+}
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+/* SPLASH IMAGE */
+.title-img {
+  width: min(90vw, 400px);
+  margin-bottom: 20px;
+}
+#menu {
+  justify-content: flex-start;
+  padding-top: 60px;
+}
+/* MENU BUTTONS */
+.menu-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  max-width: 340px;
+}
+
+.menu-buttons button {
+  width: 150px;
+  padding: 10px;
+  font-weight: bold;
+  background: #1a1a3a;
+  color: #ffe600;
+  border: 2px solid #ffe600;
+  cursor: pointer;
+}
+
+.menu-buttons button:hover {
+  background: #ffe600;
+  color: #0b0b1a;
+}
+
+/* GAME UI */
+#game {
+  justify-content: flex-start;
+  padding-top: 24px;
+}
+
+#status {
+  margin-bottom: 10px;
+  font-size: 18px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  position: relative;
+  z-index: 1001;
+}
+
+.status-title {
+  width: min(80vw, 280px);
+  max-width: 300px;
+}
+
+#board {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+
+  width: 100%;
+  max-width: 600px;
+  max-height: calc(100vh - 180px);
+  overflow: auto;
+
+  margin: 0 auto 10px;
+  padding: 0 10px;
+  box-sizing: border-box;
+
+  position: relative;
+
+  --cols: 10;
+  --gap: 2px;
+
+  --hex-size: clamp(
+    28px,
+    calc((100% / (var(--cols) + 0.5))),
+    52px
+  );
+}
+
+.hex-row {
+  display: flex;
+  justify-content: center;
+  gap: 2px;
+  width: 100%;
+}
+
+.hex-row.odd {
+  margin-left: 0;
+}
+
+/* HEXAGON CELLS */
+.hex {
+  width: var(--hex-size);
+  aspect-ratio: 40 / 46;
+  background: #2a2a4a;
+  position: relative;
+  margin: 0px;
+  cursor: pointer;
+  clip-path: polygon(50% 0%, 93.3% 25%, 93.3% 75%, 50% 100%, 6.7% 75%, 6.7% 25%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  user-select: none;
+  text-shadow: 0 0 6px currentColor;
+  font-size: clamp(12px, 2.8vw, 16px);
+  transition: background 0.2s ease;
+}
+
+.hex.revealed {
+  background: #414172;
+}
+
+.hex.mine { color: #ff004c; }
+.hex.flag { color: #ffe600; }
+
+
+/* SMILEY */
+.smiley {
+  width: 56px;
+  height: 56px;
+  border-radius: 16px;
+  background: #12122a;
+  color: #ffe600;
+  font-size: 28px;
+  cursor: pointer;
+
+  appearance: none;
+  -webkit-appearance: none;
+  outline: none;
+
+  border: 2px solid #ffe600;
+  background-clip: padding-box;
+
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+
+  box-shadow:
+    inset 0 0 0 2px rgba(0,0,0,0.2),
+    0 0 0 4px #000,
+    6px 0 0 0 #000,
+    -6px 0 0 0 #000,
+    0 6px 0 0 #000,
+    0 -6px 0 0 #000,
+    6px 6px 0 0 #000,
+    -6px -6px 0 0 #000,
+    6px -6px 0 0 #000,
+    -6px 6px 0 0 #000;
+
+  transition: transform 0.15s ease, background 0.2s ease;
+}
+
+.smiley:hover {
+  transform: scale(1.05);
+}
+
+.smiley.surprised {
+  background: #12122a;
+}
+
+.smiley.win {
+  background: #39ff14;
+}
+
+.smiley.dead {
+  background: #ff4c4c;
+  color: #ffffff;
+}
+
+.smiley:focus {
+  outline: none;
+}
+
+.smiley:focus-visible {
+  outline: none;
+}
+/* OVERLAY */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.85);
+  color: #ff004c;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 40px;
+  flex-direction: column;
+  z-index: 999;
+}
+
+.hidden {
+  display: none;
+}
+
+/* CRT SCANLINES */
+body::before {
+  content: "";
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(255,255,255,0.03),
+    rgba(255,255,255,0.03) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+  pointer-events: none;
+}
+body {
+  -webkit-text-size-adjust: 100%;
+  touch-action: manipulation;
+}
+/* MOBILE */
+@media (max-width: 600px) {
+
+.menu-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+
+.menu-buttons button {
+  width: 150px;
+}
+
+  .hex {
+    width: 32px;
+    height: 37px;
+    font-size: 12px;
+  }
+
+  .hex-row.odd {
+    margin-left: 0;
+  }
+}

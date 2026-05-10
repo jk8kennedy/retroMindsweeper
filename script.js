@@ -14,11 +14,16 @@ let revealed = [];
 let flagged = [];
 let firstClick = true;
 let gameOver = false;
+let currentLevel = "easy";
+let smileyTimer = null;
+
+const isMobile = window.innerWidth <= 600;
 
 const configs = {
   easy:   { w: 8,  h: 8,  m: 10 },
   medium: { w: 10, h: 10, m: 15 },
-  hard:   { w: 10, h: 14, m: 30 }
+  hard:   { w: 10, h: isMobile ? 13 : 14, m: 30 },
+  ultra:  { w: 12, h: 42, m: 90 }
 };
 
 // ---------------- COLORS ----------------
@@ -35,12 +40,14 @@ const numberColors = {
 
 const boardDiv = document.getElementById("board");
 
-// ---------------- SCREEN SYSTEM ----------------
 function showScreen(name) {
   document.getElementById("menu").classList.remove("active");
   document.getElementById("game").classList.remove("active");
-
   document.getElementById(name).classList.add("active");
+}
+
+function switchToHexagonMode() {
+  window.location.href = "hexagon.html";
 }
 
 function showMenu() {
@@ -57,6 +64,7 @@ function closeHelp() {
 
 // ---------------- START GAME ----------------
 function startGame(level) {
+  currentLevel = level;
   const cfg = configs[level];
 
   width = cfg.w;
@@ -71,6 +79,7 @@ function startGame(level) {
   gameOver = false;
 
   document.getElementById("overlay").classList.add("hidden");
+  setSmileyState("normal");
 
   showScreen("game");
 
@@ -154,6 +163,14 @@ function checkWin() {
 function handleClick(x, y) {
   if (gameOver) return;
 
+  setSmileyState("surprised");
+  if (smileyTimer) {
+    clearTimeout(smileyTimer);
+  }
+  smileyTimer = setTimeout(() => {
+    if (!gameOver) setSmileyState("normal");
+  }, 250);
+
   if (firstClick) {
     placeMines(x, y);
     firstClick = false;
@@ -164,6 +181,7 @@ function handleClick(x, y) {
   // 💥 MINE HIT
   if (board[y][x] === -1) {
     gameOver = true;
+    setSmileyState("dead");
 
     boomSound.currentTime = 0;
     boomSound.play();
@@ -182,6 +200,7 @@ function handleClick(x, y) {
   // 🎉 WIN CHECK
   if (checkWin()) {
     gameOver = true;
+    setSmileyState("win");
 
     winSound.currentTime = 0;
     winSound.play();
@@ -214,18 +233,42 @@ function showGameOver(text) {
 
   overlay.innerHTML = `
     <div>${text}</div>
-    <button onclick="restartGame()">RESTART</button>
+    <div style="margin-top: 18px; font-size: 16px; color: #ffe600;">Click anywhere to restart.</div>
   `;
 
   overlay.classList.remove("hidden");
+  overlay.addEventListener("click", restartGame);
 }
 
 function restartGame() {
+  document.getElementById("overlay").removeEventListener("click", restartGame);
   document.getElementById("overlay").classList.add("hidden");
   showMenu();
 }
 
 // ---------------- REVEAL ALL ----------------
+function setSmileyState(state) {
+  const smiley = document.getElementById("smiley");
+  if (!smiley) return;
+
+  smiley.className = `smiley ${state}`;
+
+  switch (state) {
+    case "surprised":
+      smiley.textContent = "😮";
+      break;
+    case "win":
+      smiley.textContent = "😎";
+      break;
+    case "dead":
+      smiley.textContent = "😵";
+      break;
+    default:
+      smiley.textContent = "😃";
+      break;
+  }
+}
+
 function revealAll() {
   for (let y = 0; y < height; y++) {
     for (let x = 0; x < width; x++) {

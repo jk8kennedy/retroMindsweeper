@@ -3,13 +3,13 @@ body {
   font-family: Courier, monospace;
   background: #000000;
   color: #ffe600;
-  min-height: 100vh;
+  min-height: 100svh;
 }
 
 /* SCREEN SYSTEM */
 .screen {
   display: none;
-  min-height: 100vh;
+  min-height: 100svh;
   width: 100vw;
 
   flex-direction: column;
@@ -22,9 +22,13 @@ body {
 .screen.active {
   display: flex;
 }
-
-.screen.active {
-  display: flex;
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+#menu {
+  justify-content: flex-start;
+  padding-top: 60px;
 }
 
 /* SPLASH IMAGE */
@@ -34,9 +38,16 @@ body {
 }
 
 /* MENU BUTTONS */
+.menu-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  max-width: 340px;
+}
+
 .menu-buttons button {
-  width: 180px;
-  margin: 8px auto;
+  width: 150px;
   padding: 10px;
   font-weight: bold;
   background: #1a1a3a;
@@ -51,9 +62,25 @@ body {
 }
 
 /* GAME UI */
+#game {
+  justify-content: flex-start;
+  padding-top: 24px;
+}
+
 #status {
   margin-bottom: 10px;
   font-size: 18px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  position: relative;
+  z-index: 1001;
+}
+
+.status-title {
+  width: min(80vw, 280px);
+  max-width: 300px;
 }
 
 #board {
@@ -61,7 +88,67 @@ body {
   gap: 2px;
   justify-content: center;
   width: min(95vw, 500px);
+  max-height: calc(100vh - 180px);
+  overflow: auto;
   margin-bottom: 10px;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+}
+
+.smiley {
+  width: 56px;
+  height: 56px;
+  border-radius: 16px;
+  background: #12122a;
+  color: #ffe600;
+  font-size: 28px;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  outline: none;
+  border: 2px solid #ffe600;
+  background-clip: padding-box;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow:
+    inset 0 0 0 2px rgba(0,0,0,0.2),
+    0 0 0 4px #000,
+    6px 0 0 0 #000,
+    -6px 0 0 0 #000,
+    0 6px 0 0 #000,
+    0 -6px 0 0 #000,
+    6px 6px 0 0 #000,
+    -6px -6px 0 0 #000,
+    6px -6px 0 0 #000,
+    -6px 6px 0 0 #000;
+  transition: transform 0.15s ease, background 0.2s ease;
+}
+
+.smiley:focus {
+  outline: none;
+}
+
+.smiley:focus-visible {
+  outline: none;
+}
+
+.smiley:hover {
+  transform: scale(1.05);
+}
+
+.smiley.surprised {
+  background: #12122a;
+}
+
+
+.smiley.win {
+  background: #39ff14;
+}
+
+.smiley.dead {
+  background: #ff4c4c;
+  color: #ffffff;
 }
 
 /* CELLS */
@@ -69,7 +156,7 @@ body {
   aspect-ratio: 1 / 1;
   width: 100%;
   min-width: 0;
-  background: #12122a;
+  background: #2a2a4a;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -77,14 +164,29 @@ body {
   user-select: none;
   cursor: pointer;
   text-shadow: 0 0 6px currentColor;
-  font-size: clamp(10px, 2.5vw, 16px);
+  font-size: clamp(12px, 2.8vw, 16px);
 }
 .cell.revealed {
-  background: #202040;
+  background: #414172;
 }
 
 .mine { color: #ff004c; }
 .flag { color: #ffe600; }
+
+/* MOBILE */
+@media (max-width: 600px) {
+
+  .menu-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .menu-buttons button {
+    width: 150px;
+  }
+}
 
 /* RESTART BUTTON */
 #restart {
@@ -133,15 +235,3 @@ body::before {
   pointer-events: none;
 }
 
-/* MOBILE */
-@media (max-width: 600px) {
-  .cell {
-    width: 28px;
-    height: 28px;
-    font-size: 14px;
-  }
-
-  .menu-buttons button {
-    width: 150px;
-  }
-}

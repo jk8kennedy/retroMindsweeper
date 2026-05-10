@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>Retro Minesweeper 1985</title>
   <link rel="stylesheet" href="styles.css">
   <link rel="manifest" href="manifest.json">
@@ -18,18 +18,19 @@
     <button onclick="startGame('easy')">EASY</button>
     <button onclick="startGame('medium')">MEDIUM</button>
     <button onclick="startGame('hard')">HARD</button>
+    <button onclick="startGame('ultra')">ULTRA</button>
+    <button onclick="switchToHexagonMode()">HEX MODE</button>
     <button onclick="showHowTo()">HOW TO PLAY</button>
-      
   </div>
 </div>
 
 <!-- GAME -->
 <div id="game" class="screen">
-<div id="status">
-  <img src="title.png" alt="Retro Minesweeper" class="status-title">
-</div>
+  <div id="status">
+    <img src="title.png" alt="Retro Minesweeper" class="status-title">
+    <button id="smiley" class="smiley" onclick="restartGame()" aria-label="Restart game">😃</button>
+  </div>
   <div id="board"></div>
-  <button id="restart" onclick="showMenu()">PLAY AGAIN</button>
 </div>
 <!-- Instructions -->
 <div id="helpOverlay" class="overlay hidden">
@@ -48,6 +49,7 @@
   </div>
 </div>
 <!-- GAME OVER OVERLAY -->
+
 <div id="overlay" class="overlay hidden"></div>
 
 <script src="script.js"></script>
