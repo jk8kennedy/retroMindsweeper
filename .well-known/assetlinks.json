@@ -1,0 +1,15 @@
+[
+  {
+    "relation": [
+      "delegate_permission/common.handle_all_urls",
+      "delegate_permission/common.get_login_creds"
+    ],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "io.github.jk8kennedy.retrominesweeper",
+      "sha256_cert_fingerprints": [
+        "7B:86:36:66:C9:60:13:A7:86:BB:1E:F1:60:94:AE:68:7E:5F:D6:9C:2A:99:75:1F:2F:B8:CE:B9:9B:45:E8:A7"
+      ]
+    }
+  }
+]
