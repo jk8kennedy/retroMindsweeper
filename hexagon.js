@@ -20,8 +20,8 @@ let smileyTimer = null;
 const isMobile = window.innerWidth <= 600;
 
 const configs = {
-  easy:   { w: 8,  h: 10,  m: 12 },
-  medium: { w: isMobile ? 8 : 9,  h: 10,  m: 16 },
+  easy:   { w: 9,  h: 10,  m: 12 },
+  medium: { w: isMobile ? 9 : 11,  h: 10,  m: 16 },
   hard:   { w: isMobile ? 9 : 11, h: isMobile ? 10 : 11, m: 25 },
   ultra:  { w: isMobile ? 9 : 11, h: isMobile ? 30 : 33, m: 90 }
 };
